@@ -108,18 +108,16 @@ The parameters were hand tuned to d = 0.5, RS = 0.06, RL = 0.38
 on "Alice in Wonderland".
 */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
-#include <math.h>
-#include <time.h>
-#include <new.h>
-
-// Replacing the next 3 lines with #include "std.h" would make the executable
-// smaller, and would not affect archive compatibility or performance.
-#include <vector>
+#include <cstdio>
+#include <cstdlib>
+#include <cctype>
+#include <cmath>
+#include <ctime>
+#include <new>
 #include <string>
+#include <vector>
+#include <algorithm>
+#include <map>
 using namespace std;
 
 typedef double real;
@@ -196,8 +194,9 @@ public:
   };
   struct Wt {       // Array of synapses
     short w;        // Weight *1K
+    struct C {unsigned char c0, c1;};
     union {
-      struct C {unsigned char c0, c1;} c;  // Counts of 0, 1
+      C c;  // Counts of 0, 1
       unsigned short c01;  // Concatenated counts for sigma2 function
     };
   };
@@ -443,7 +442,7 @@ void handler() {
 }
 
 // User interface
-main(int argc, char** argv) {
+int main(int argc, char** argv) {
   set_new_handler(handler);
   if (sizeof(int) < 4) {
     fprintf(stderr, "32 bit compiler required\n");

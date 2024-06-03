@@ -60,12 +60,17 @@ error, Y - P(Y).
 */
 
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
-#include <math.h>
-#include <time.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cctype>
+#include <cmath>
+#include <ctime>
+#include <new>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <map>
+using namespace std;
 
 typedef double real;
 typedef unsigned long ulong;
@@ -234,7 +239,6 @@ void Predictor::update(int y) {
 
 // Print stats in destructor
 Predictor::~Predictor() {
-/*
   // Largest weights
   printf("\nLargest weights\n");
   int wmax=0, wmin=0;
@@ -276,7 +280,6 @@ Predictor::~Predictor() {
     scale*=0.25;
   }
   printf("%d zeros\n", zeros);
-*/
 }
 
 
@@ -486,7 +489,7 @@ void handler() {
 }
 
 // User interface
-main(int argc, char** argv) {
+int main(int argc, char** argv) {
   set_new_handler(handler);
 
   // Check arguments
